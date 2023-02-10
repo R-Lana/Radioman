@@ -2,7 +2,7 @@ package ru.netology.radio;
 
 public class Radio {
     private int currentNumberRadio;
-    public int currentNumberVolume;
+    private int currentNumberVolume;
 
 
     public int getCurrentNumber() {
@@ -20,6 +20,10 @@ public class Radio {
         return currentNumberRadio;
     }
 
+    public int setCurrentNumberVolume(int newCurrentNumber) {
+        currentNumberVolume = newCurrentNumber;
+        return currentNumberVolume;
+    }
 
     public int increaseVolume() {
         currentNumberVolume += 1;
