@@ -16,7 +16,7 @@ public class TestRadio {
 
     @Test
     public void shouldNotSetNumberAboveMaxWithoutChangeAmount() {
-        Radio num = new Radio ();
+        Radio num = new Radio();
         num.setCurrentNumber(8);
         num.setCurrentNumber(15);
         int expected = 8;
@@ -39,7 +39,7 @@ public class TestRadio {
 
     @Test
     public void shouldNotSetNumberAboveMaxWithChangeAmount() {
-        Radio num = new Radio (15);
+        Radio num = new Radio(15);
         num.setCurrentNumber(8);
         num.setCurrentNumber(20);
         int expected = 8;
