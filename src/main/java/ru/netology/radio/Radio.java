@@ -3,7 +3,17 @@ package ru.netology.radio;
 public class Radio {
     private int currentNumberRadio;
     private int currentNumberVolume;
+    private int amountStation = 10;
+    private int minVolume = 0;
+    private int maxVolume = 100;
 
+    public Radio() {
+
+    }
+
+    public Radio(int amountStation) {
+        this.amountStation = amountStation;
+    }
 
     public int getCurrentNumber() {
         return currentNumberRadio;
@@ -11,12 +21,10 @@ public class Radio {
 
 
     public int setCurrentNumber(int newCurrentNumber) {
-        if (newCurrentNumber > 9) {
-            while (newCurrentNumber > 9) {
-                newCurrentNumber = newCurrentNumber / 10;
-            }
+        if (newCurrentNumber < amountStation) {
+
+            currentNumberRadio = newCurrentNumber;
         }
-        currentNumberRadio = newCurrentNumber;
         return currentNumberRadio;
     }
 
@@ -27,8 +35,8 @@ public class Radio {
 
     public int increaseVolume() {
         currentNumberVolume += 1;
-        if (currentNumberVolume > 10) {
-            currentNumberVolume = 10;
+        if (currentNumberVolume > maxVolume) {
+            currentNumberVolume = maxVolume;
         }
         return currentNumberVolume;
     }
@@ -36,8 +44,8 @@ public class Radio {
 
     public int decreaseVolume() {
         currentNumberVolume -= 1;
-        if (currentNumberVolume < 0) {
-            currentNumberVolume = 0;
+        if (currentNumberVolume < minVolume) {
+            currentNumberVolume = minVolume;
         }
         return currentNumberVolume;
     }
@@ -45,7 +53,7 @@ public class Radio {
 
     public int next() {
         currentNumberRadio += 1;
-        if (currentNumberRadio > 9) {
+        if (currentNumberRadio > amountStation - 1) {
             currentNumberRadio = 0;
         }
         return currentNumberRadio;
@@ -55,7 +63,7 @@ public class Radio {
     public int prev() {
         currentNumberRadio -= 1;
         if (currentNumberRadio < 0) {
-            currentNumberRadio = 9;
+            currentNumberRadio = amountStation - 1;
         }
         return currentNumberRadio;
     }

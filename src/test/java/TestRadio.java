@@ -4,7 +4,7 @@ import ru.netology.radio.Radio;
 
 public class TestRadio {
     @Test
-    public void shouldSetNumber() {
+    public void shouldSetNumberWithoutChangeAmount() {
         Radio num = new Radio();
         num.setCurrentNumber(8);
         int expected = 8;
@@ -15,10 +15,34 @@ public class TestRadio {
     }
 
     @Test
-    public void shouldNotSetNumberAboveMax() {
+    public void shouldNotSetNumberAboveMaxWithoutChangeAmount() {
         Radio num = new Radio();
-        num.setCurrentNumber(239);
-        int expected = 2;
+        num.setCurrentNumber(8);
+        num.setCurrentNumber(15);
+        int expected = 8;
+        int actual = num.getCurrentNumber();
+        Assertions.assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    public void shouldSetNumberWithChangeAmount() {
+        Radio num = new Radio(15);
+        num.setCurrentNumber(8);
+        int expected = 8;
+        int actual = num.getCurrentNumber();
+        Assertions.assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    public void shouldNotSetNumberAboveMaxWithChangeAmount() {
+        Radio num = new Radio(15);
+        num.setCurrentNumber(8);
+        num.setCurrentNumber(20);
+        int expected = 8;
         int actual = num.getCurrentNumber();
         Assertions.assertEquals(expected, actual);
 
@@ -27,9 +51,9 @@ public class TestRadio {
 
     @Test
     public void moveToNextNumber() {
-        Radio num = new Radio();
-        num.setCurrentNumber(7);
-        int expected = 8;
+        Radio num = new Radio(20);
+        num.setCurrentNumber(15);
+        int expected = 16;
         int actual = num.next();
         Assertions.assertEquals(expected, actual);
 
@@ -37,8 +61,8 @@ public class TestRadio {
 
     @Test
     public void moveToNextIfNumberAboveMax() {
-        Radio num = new Radio();
-        num.setCurrentNumber(9);
+        Radio num = new Radio(20);
+        num.setCurrentNumber(19);
         int expected = 0;
         int actual = num.next();
         Assertions.assertEquals(expected, actual);
@@ -47,9 +71,9 @@ public class TestRadio {
 
     @Test
     public void moveToPrevNumber() {
-        Radio num = new Radio();
-        num.setCurrentNumber(7);
-        int expected = 6;
+        Radio num = new Radio(20);
+        num.setCurrentNumber(16);
+        int expected = 15;
         int actual = num.prev();
         Assertions.assertEquals(expected, actual);
 
@@ -57,9 +81,9 @@ public class TestRadio {
 
     @Test
     public void moveToPrevIfNumberUnderMin() {
-        Radio num = new Radio();
+        Radio num = new Radio(20);
         num.setCurrentNumber(0);
-        int expected = 9;
+        int expected = 19;
         int actual = num.prev();
         Assertions.assertEquals(expected, actual);
 
@@ -68,8 +92,8 @@ public class TestRadio {
     @Test
     public void moveUnderMaxVolume() {
         Radio value = new Radio();
-        value.setCurrentNumberVolume(7);
-        int expected = 8;
+        value.setCurrentNumberVolume(70);
+        int expected = 71;
         int actual = value.increaseVolume();
         Assertions.assertEquals(expected, actual);
 
@@ -78,8 +102,8 @@ public class TestRadio {
     @Test
     public void moveAboveMaxVolume() {
         Radio value = new Radio();
-        value.setCurrentNumberVolume(10);
-        int expected = 10;
+        value.setCurrentNumberVolume(100);
+        int expected = 100;
         int actual = value.increaseVolume();
         Assertions.assertEquals(expected, actual);
 
@@ -88,8 +112,8 @@ public class TestRadio {
     @Test
     public void moveAboveMinVolume() {
         Radio value = new Radio();
-        value.setCurrentNumberVolume(7);
-        int expected = 6;
+        value.setCurrentNumberVolume(70);
+        int expected = 69;
         int actual = value.decreaseVolume();
         Assertions.assertEquals(expected, actual);
 
